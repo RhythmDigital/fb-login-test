@@ -19,18 +19,20 @@
 
 <body>
 
-<?php //$this->load->view("includes/fb"); ?>
-
 <!--
   Below we include the Login Button social plugin. This button uses
   the JavaScript SDK to present a graphical Login button that triggers
   the FB.login() function when clicked.
 -->
 
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
+<a id="login-button" href="javascript:;" class="button">Log in</a>
+<a id="logout-button" href="javascript:;" class="button">Log out</a>
 
 <div id="status">
+</div>
+
+<div class="app-display">
+	<a id="get-me-button" href="javascript:;" class="button">Ooh, Get me</a>
 </div>
 
 

@@ -3,7 +3,7 @@ html, body {
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: #000000;
+  background-color: black;
   color: white;
   text-align: center;
   font: 100% "clarendon-wide", sans-serif;
@@ -11,38 +11,28 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   letter-spacing: -0.5px;
-  -webkit-tap-highlight-color: transparent; }
+  -webkit-tap-highlight-color: transparent;
+  padding-top: 50px; }
 
-#wrapper {
+a.button {
+  display: inline-block;
+  text-decoration: none;
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  padding: 15px 40px 14px;
+  background-color: #333;
+  color: yellow;
+  border: 1px solid yellow; }
+
+a.button:active, a.button:hover {
+  background-color: yellow;
+  color: black; }
+
+#status {
+  margin-top: 50px;
+  font-size: 30px; }
+
+.app-display {
+  display: none;
   position: relative;
-  width: auto;
-  height: 100%;
-  margin: auto;
-  padding: 0 0 100px;
-  box-sizing: border-box;
-  text-align: left; }
-  @media screen and (max-width: 768px) {
-    #wrapper {
-      padding: 0 0 80px; } }
-  @media screen and (max-width: 470px) {
-    #wrapper {
-      padding: 0 0 40px; } }
-
-.row {
-  display: block;
-  position: relative;
-  width: 100%;
-  height: auto;
-  overflow: auto; }
-  .row .photo {
-    display: inline-block;
-    position: relative;
-    width: 200px;
-    height: 100%;
-    float: left;
-    background: url("") center center no-repeat;
-    background-size: cover;
-    box-sizing: border-box;
-    border: 1px solid #fcf9e8; }
-
-/*# sourceMappingURL=main.css.map */
+  margin-top: 60px; }

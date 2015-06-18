@@ -11,6 +11,9 @@ define([],
 
 			var p = FBManager.prototype;
 
+			p.USER_LOGGED_IN = "USER_LOGGED_IN";
+			p.USER_LOGGED_OUT = "USER_LOGGED_OUT";
+
 
 			p.initFB = function()
 			{
@@ -50,6 +53,16 @@ define([],
 				}(document, 'script', 'facebook-jssdk'));
 			}
 
+			p.login = function()
+			{
+				FB.login(this.statusChangeCallback.bind(this));
+			}
+
+			p.logout = function()
+			{
+				FB.logout(this.statusChangeCallback.bind(this));
+			}
+
 
 			// This is called with the results from from FB.getLoginStatus().
 			p.statusChangeCallback = function(response)
@@ -75,6 +88,7 @@ define([],
 					// The person is not logged into Facebook, so we're not sure if
 					// they are logged into this app or not.
 					document.getElementById('status').innerHTML = 'Please log ' + 'into Facebook.';
+					$(this).trigger(FBManager.prototype.USER_LOGGED_OUT);
 				}
 			}
 
@@ -84,9 +98,11 @@ define([],
 			// code below.
 			p.checkLoginState = function()
 			{
-				FB.getLoginStatus((function(response) {
+				FB.getLoginStatus((function(response)
+				{
 					this.statusChangeCallback(response);
-				}).bind(this));
+				}
+				).bind(this));
 			}
 
 			// Here we run a very simple test of the Graph API after login is
@@ -94,11 +110,15 @@ define([],
 			p.testAPI = function()
 			{
 				console.log('Welcome!  Fetching your information.... ');
-				FB.api('/me', function(response) {
-					console.log('Successful login for: ' + response.name);
-					document.getElementById('status').innerHTML =
-							'Thanks for logging in, ' + response.name + '!';
-				});
+				FB.api('/me', this.onSuccessfulLogin.bind(this));
+			}
+
+			p.onSuccessfulLogin = function(response)
+			{
+				console.log('Successful login for: ' + response.name);
+				document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
+
+				$(this).trigger(FBManager.prototype.USER_LOGGED_IN);
 			}
 
 			// Return the base class constructor.
